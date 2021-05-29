@@ -135,28 +135,23 @@ extension ViewController: UICollectionViewDelegate {
 
 
 extension ViewController: SnakeManagerDelegate {
-    func gameDidStart(snake: Snake?, coin: NodePosition) {
-        if let snake = snake {
-            nodes = snake.nodes
-        }
-        
+    func gameDidStart(snake: Snake, coin: NodePosition) {
+        nodes = snake.nodes
         self.coin = coin
         collectionView.reloadData()
     }
     
-    func snakeDidUpdate(snake: Snake?) {
-        if let snake = snake {
-            nodes = snake.nodes
-            collectionView.reloadData()
-        }
+    func gameDidUpdate(snake: Snake, coin: NodePosition) {
+        nodes = snake.nodes
+        self.coin = coin
+        collectionView.reloadData()
     }
     
     func mapSize() -> (Int, Int) {
         return (verticalNodeCount ?? 0, horizontalNodeCount ?? 0)
     }
     
-    func coinDidUpdate(coin: NodePosition) {
-        self.coin = coin
-        collectionView.reloadData()
+    func gameDidEnd() {
+        NSLog("Game over!")
     }
 }

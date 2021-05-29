@@ -8,10 +8,10 @@
 import Foundation
 
 protocol SnakeManagerDelegate: class {
-    func gameDidStart(snake: Snake?, coin: NodePosition)
-    func snakeDidUpdate(snake: Snake?)
-    func coinDidUpdate(coin: NodePosition)
+    func gameDidStart(snake: Snake, coin: NodePosition)
+    func gameDidUpdate(snake: Snake, coin: NodePosition)    
     func mapSize() -> (Int, Int)
+    func gameDidEnd()
 }
 
 enum GameStatus {
@@ -24,7 +24,13 @@ class SnakeManager {
     static let shared = SnakeManager()
     private var snake: Snake?
     weak var delegate: SnakeManagerDelegate?
-    private var gameStatus: GameStatus = .ended
+    private var gameStatus: GameStatus = .ended {
+        didSet {
+            if gameStatus == .ended {
+                delegate?.gameDidEnd()
+            }
+        }
+    }
     private var coin: NodePosition?
     private var speed: TimeInterval = 0.3
     
@@ -38,7 +44,7 @@ class SnakeManager {
         let center = (mapSize.0 / 2, mapSize.1 / 2)
         snake = Snake(startPosition: center)
         coin = generatePositionForCoin()
-        delegate?.gameDidStart(snake: snake, coin: coin!)
+        delegate?.gameDidStart(snake: snake!, coin: coin!)
         setupCycleTimer()
     }
 
@@ -55,17 +61,19 @@ class SnakeManager {
     
     @objc
     private func cycleTimerAction() {
-        // Move.
+        // Move snake.
         snake?.move()
-        // Check getting point.
-        checkGettingCoin()
-        delegate?.snakeDidUpdate(snake: snake)
-        
+        // Check getting coin or not.
+        if (doesGetCoin()) {
+            coin = generatePositionForCoin()
+        }
+        // Update UI.
+        delegate?.gameDidUpdate(snake: snake!, coin: coin!)
         // Check end game.
         if isGameOver() {
             cycleTimer?.invalidate()
             cycleTimer = nil
-            NSLog("Game over!")
+            gameStatus = .ended            
         }
     }
     
@@ -104,10 +112,12 @@ class SnakeManager {
         return false
     }
     
-    private func checkGettingCoin() {
+    private func doesGetCoin() -> Bool {
         if let snake = snake, let coin = coin, NodePositionUtils.isAtSamePosition(leftNode: snake.head, rightNode: coin) {
             snake.increase()
+            return true
         }
+        return false
     }
 }
 

@@ -15,6 +15,10 @@
 		3D41E3D22662140F00E870A9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3D41E3D02662140F00E870A9 /* LaunchScreen.storyboard */; };
 		3D41E3DD2662140F00E870A9 /* SnakeGameiOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D41E3DC2662140F00E870A9 /* SnakeGameiOSTests.swift */; };
 		3D41E3E82662140F00E870A9 /* SnakeGameiOSUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D41E3E72662140F00E870A9 /* SnakeGameiOSUITests.swift */; };
+		3D41E3FB266214AC00E870A9 /* Snake.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D41E3FA266214AC00E870A9 /* Snake.swift */; };
+		3D41E400266214E400E870A9 /* NodePositionUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D41E3FF266214E400E870A9 /* NodePositionUtils.swift */; };
+		3D41E4062662173D00E870A9 /* BoardCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D41E4052662173D00E870A9 /* BoardCollectionViewCell.swift */; };
+		3D41E40F266224CB00E870A9 /* SnakeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D41E40E266224CB00E870A9 /* SnakeManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +53,10 @@
 		3D41E3E32662140F00E870A9 /* SnakeGameiOSUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SnakeGameiOSUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D41E3E72662140F00E870A9 /* SnakeGameiOSUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnakeGameiOSUITests.swift; sourceTree = "<group>"; };
 		3D41E3E92662140F00E870A9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3D41E3FA266214AC00E870A9 /* Snake.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Snake.swift; sourceTree = "<group>"; };
+		3D41E3FF266214E400E870A9 /* NodePositionUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NodePositionUtils.swift; sourceTree = "<group>"; };
+		3D41E4052662173D00E870A9 /* BoardCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardCollectionViewCell.swift; sourceTree = "<group>"; };
+		3D41E40E266224CB00E870A9 /* SnakeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnakeManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +107,10 @@
 		3D41E3C42662140E00E870A9 /* SnakeGameiOS */ = {
 			isa = PBXGroup;
 			children = (
+				3D41E40D266224BA00E870A9 /* SnakeManager */,
+				3D41E404266216E900E870A9 /* View */,
+				3D41E3F92662146E00E870A9 /* Utils */,
+				3D41E3F82662146700E870A9 /* Model */,
 				3D41E3C52662140E00E870A9 /* AppDelegate.swift */,
 				3D41E3C72662140E00E870A9 /* SceneDelegate.swift */,
 				3D41E3C92662140E00E870A9 /* ViewController.swift */,
@@ -126,6 +138,38 @@
 				3D41E3E92662140F00E870A9 /* Info.plist */,
 			);
 			path = SnakeGameiOSUITests;
+			sourceTree = "<group>";
+		};
+		3D41E3F82662146700E870A9 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				3D41E3FA266214AC00E870A9 /* Snake.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		3D41E3F92662146E00E870A9 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				3D41E3FF266214E400E870A9 /* NodePositionUtils.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		3D41E404266216E900E870A9 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				3D41E4052662173D00E870A9 /* BoardCollectionViewCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		3D41E40D266224BA00E870A9 /* SnakeManager */ = {
+			isa = PBXGroup;
+			children = (
+				3D41E40E266224CB00E870A9 /* SnakeManager.swift */,
+			);
+			path = SnakeManager;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -258,9 +302,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3D41E3FB266214AC00E870A9 /* Snake.swift in Sources */,
 				3D41E3CA2662140E00E870A9 /* ViewController.swift in Sources */,
+				3D41E400266214E400E870A9 /* NodePositionUtils.swift in Sources */,
+				3D41E40F266224CB00E870A9 /* SnakeManager.swift in Sources */,
 				3D41E3C62662140E00E870A9 /* AppDelegate.swift in Sources */,
 				3D41E3C82662140E00E870A9 /* SceneDelegate.swift in Sources */,
+				3D41E4062662173D00E870A9 /* BoardCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -366,7 +414,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -421,7 +469,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;

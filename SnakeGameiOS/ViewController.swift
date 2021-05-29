@@ -9,6 +9,8 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    private var startButton: UIButton!
+    private var buttonView: UIView!
     private var gestureView: UIView!
     private var collectionView: UICollectionView!
     private var horizontalNodeCount: Int?
@@ -24,6 +26,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         setupCollectionView()
         setupGestureView()
+        setupButtonView()
         SnakeManager.shared.delegate = self
     }
 
@@ -35,8 +38,40 @@ class ViewController: UIViewController {
         super.viewDidLayoutSubviews()
         verticalNodeCount = Int(collectionView.frame.height) / nodeWidth
         horizontalNodeCount = Int(collectionView.frame.width) / nodeWidth
+    }
+    
+    private func setupButtonView() {
+        buttonView = UIView()
+        buttonView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(buttonView)
+        let centerXAnchor = buttonView.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+        let centerYanchor = buttonView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+        let widthAnchor = buttonView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8)
+        let heightAnchor = buttonView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.4)
         
-        SnakeManager.shared.startGame(mapSize: (verticalNodeCount!, horizontalNodeCount!))
+        startButton = UIButton()
+        startButton.backgroundColor = .black
+        startButton.contentHorizontalAlignment = .center
+        startButton.contentVerticalAlignment = .center
+        startButton.addTarget(self, action: #selector(startAction(_:)), for: .touchUpInside)
+        startButton.setTitle("Tap to start!", for: .normal)
+        startButton.titleLabel?.font = UIFont.systemFont(ofSize: 40, weight: .bold)
+        startButton.translatesAutoresizingMaskIntoConstraints = false
+        buttonView.addSubview(startButton)
+        let startButtonCenterXAnchor = startButton.centerXAnchor.constraint(equalTo: buttonView.centerXAnchor)
+        let startButtonCenterYanchor = startButton.centerYAnchor.constraint(equalTo: buttonView.centerYAnchor)
+        let startButtonWidthAnchor = startButton.widthAnchor.constraint(equalTo: buttonView.widthAnchor, multiplier: 0.8)
+        let startButtonHeightAnchor = startButton.heightAnchor.constraint(equalTo: buttonView.heightAnchor, multiplier: 0.6)
+        
+        NSLayoutConstraint.activate([centerXAnchor, centerYanchor, widthAnchor, heightAnchor, startButtonCenterXAnchor, startButtonCenterYanchor, startButtonWidthAnchor, startButtonHeightAnchor])
+    }
+    
+    private func updateStartButtonState(enable: Bool) {
+        buttonView.isHidden = !enable
+        startButton.setTitle("Game Over! \nTap to retry", for: .normal)
+        startButton.titleLabel?.numberOfLines = 2
+        startButton.titleLabel?.lineBreakMode = .byCharWrapping
+        view.layoutIfNeeded()
     }
     
     private func setupGestureView() {
@@ -102,6 +137,12 @@ class ViewController: UIViewController {
             break
         }
     }
+    
+    @objc
+    private func startAction(_ sender: UIButton) {
+        updateStartButtonState(enable: false)
+        SnakeManager.shared.startGame(mapSize: (verticalNodeCount!, horizontalNodeCount!))
+    }
 }
 
 extension ViewController: UICollectionViewDataSource {
@@ -152,6 +193,6 @@ extension ViewController: SnakeManagerDelegate {
     }
     
     func gameDidEnd() {
-        NSLog("Game over!")
+        updateStartButtonState(enable: true)
     }
 }

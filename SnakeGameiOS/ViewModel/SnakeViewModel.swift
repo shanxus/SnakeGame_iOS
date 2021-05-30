@@ -28,16 +28,7 @@ class SnakeViewModel {
     }
     
     func updateSnakeMovingDirection(_ direction: Direction) {
-        switch direction {
-        case .up:
-            SnakeManager.shared.updateSnakeDirection(direction: .down)
-        case .down:
-            SnakeManager.shared.updateSnakeDirection(direction: .up)
-        case .left:
-            SnakeManager.shared.updateSnakeDirection(direction: .right)
-        case .right:            
-            SnakeManager.shared.updateSnakeDirection(direction: .left)
-        }
+        SnakeManager.shared.updateSnakeDirection(direction: direction)        
     }
     
     func isSnakeOccupied(at position: NodePosition) -> Bool {

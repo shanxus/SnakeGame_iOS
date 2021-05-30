@@ -10,17 +10,16 @@ import Foundation
 class NodePositionUtils {
     static let step: Int = 1
     
-    static func getNodePosition(from position: NodePosition, toward direction: Direction) -> NodePosition {
-        
+    static func getNodePosition(from position: NodePosition, toward direction: Direction) -> NodePosition {        
         switch direction {
         case .up:
-            return (position.0, position.1  + step)
-        case .down:            
             return (position.0, position.1  - step)
+        case .down:            
+            return (position.0, position.1  + step)
         case .left:
-            return (position.0 + step, position.1)
-        case .right:
             return (position.0 - step, position.1)
+        case .right:
+            return (position.0 + step, position.1)
         }
     }
     

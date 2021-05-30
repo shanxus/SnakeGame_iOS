@@ -19,6 +19,8 @@
 		3D41E400266214E400E870A9 /* NodePositionUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D41E3FF266214E400E870A9 /* NodePositionUtils.swift */; };
 		3D41E4062662173D00E870A9 /* BoardCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D41E4052662173D00E870A9 /* BoardCollectionViewCell.swift */; };
 		3D41E40F266224CB00E870A9 /* SnakeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D41E40E266224CB00E870A9 /* SnakeManager.swift */; };
+		3D41E41E266347C500E870A9 /* SnakeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D41E41D266347C500E870A9 /* SnakeViewModel.swift */; };
+		3D41E428266369AA00E870A9 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D41E427266369AA00E870A9 /* Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +59,8 @@
 		3D41E3FF266214E400E870A9 /* NodePositionUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NodePositionUtils.swift; sourceTree = "<group>"; };
 		3D41E4052662173D00E870A9 /* BoardCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardCollectionViewCell.swift; sourceTree = "<group>"; };
 		3D41E40E266224CB00E870A9 /* SnakeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnakeManager.swift; sourceTree = "<group>"; };
+		3D41E41D266347C500E870A9 /* SnakeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnakeViewModel.swift; sourceTree = "<group>"; };
+		3D41E427266369AA00E870A9 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,13 +111,15 @@
 		3D41E3C42662140E00E870A9 /* SnakeGameiOS */ = {
 			isa = PBXGroup;
 			children = (
+				3D41E4262663698E00E870A9 /* Extension */,
+				3D41E4252663696800E870A9 /* ViewController */,
+				3D41E41C2663479E00E870A9 /* ViewModel */,
 				3D41E40D266224BA00E870A9 /* SnakeManager */,
 				3D41E404266216E900E870A9 /* View */,
 				3D41E3F92662146E00E870A9 /* Utils */,
 				3D41E3F82662146700E870A9 /* Model */,
 				3D41E3C52662140E00E870A9 /* AppDelegate.swift */,
 				3D41E3C72662140E00E870A9 /* SceneDelegate.swift */,
-				3D41E3C92662140E00E870A9 /* ViewController.swift */,
 				3D41E3CB2662140E00E870A9 /* Main.storyboard */,
 				3D41E3CE2662140F00E870A9 /* Assets.xcassets */,
 				3D41E3D02662140F00E870A9 /* LaunchScreen.storyboard */,
@@ -170,6 +176,30 @@
 				3D41E40E266224CB00E870A9 /* SnakeManager.swift */,
 			);
 			path = SnakeManager;
+			sourceTree = "<group>";
+		};
+		3D41E41C2663479E00E870A9 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				3D41E41D266347C500E870A9 /* SnakeViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		3D41E4252663696800E870A9 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				3D41E3C92662140E00E870A9 /* ViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		3D41E4262663698E00E870A9 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				3D41E427266369AA00E870A9 /* Extension.swift */,
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -302,11 +332,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3D41E428266369AA00E870A9 /* Extension.swift in Sources */,
 				3D41E3FB266214AC00E870A9 /* Snake.swift in Sources */,
 				3D41E3CA2662140E00E870A9 /* ViewController.swift in Sources */,
 				3D41E400266214E400E870A9 /* NodePositionUtils.swift in Sources */,
 				3D41E40F266224CB00E870A9 /* SnakeManager.swift in Sources */,
 				3D41E3C62662140E00E870A9 /* AppDelegate.swift in Sources */,
+				3D41E41E266347C500E870A9 /* SnakeViewModel.swift in Sources */,
 				3D41E3C82662140E00E870A9 /* SceneDelegate.swift in Sources */,
 				3D41E4062662173D00E870A9 /* BoardCollectionViewCell.swift in Sources */,
 			);

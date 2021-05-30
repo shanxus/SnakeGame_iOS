@@ -8,9 +8,8 @@
 import Foundation
 
 protocol SnakeManagerDelegate: class {
-    func gameDidStart(snake: Snake, coin: NodePosition)
-    func gameDidUpdate(snake: Snake, coin: NodePosition)    
     func mapSize() -> (Int, Int)
+    func gameDidUpdate()
     func gameDidEnd()
 }
 
@@ -22,7 +21,7 @@ class SnakeManager {
     // MARK: - Properties
     private var cycleTimer: Timer?
     static let shared = SnakeManager()
-    private var snake: Snake?
+    private(set) var snake: Snake?
     weak var delegate: SnakeManagerDelegate?
     private var gameStatus: GameStatus = .ended {
         didSet {
@@ -31,7 +30,7 @@ class SnakeManager {
             }
         }
     }
-    private var coin: NodePosition?
+    private(set) var coin: NodePosition?
     private var speed: TimeInterval = 0.3
     
     private init() {}
@@ -44,7 +43,7 @@ class SnakeManager {
         let center = (mapSize.0 / 2, mapSize.1 / 2)
         snake = Snake(startPosition: center)
         coin = generatePositionForCoin()
-        delegate?.gameDidStart(snake: snake!, coin: coin!)
+        delegate?.gameDidUpdate()
         setupCycleTimer()
     }
 
@@ -68,7 +67,7 @@ class SnakeManager {
             coin = generatePositionForCoin()
         }
         // Update UI.
-        delegate?.gameDidUpdate(snake: snake!, coin: coin!)
+        delegate?.gameDidUpdate()
         // Check end game.
         if isGameOver() {
             cycleTimer?.invalidate()

@@ -14,23 +14,23 @@ class NodePositionUtils {
         
         switch direction {
         case .up:
-            return (position.0 + step, position.1)
+            return (position.0, position.1  + step)
         case .down:            
-            return (position.0 - step, position.1)
+            return (position.0, position.1  - step)
         case .left:
-            return (position.0, position.1 + step)
+            return (position.0 + step, position.1)
         case .right:
-            return (position.0, position.1 - step)
+            return (position.0 - step, position.1)
         }
     }
     
     static func getNodeDirection(targetNode: NodePosition, previousNode: NodePosition) -> Direction? {
         if targetNode.0 == previousNode.0 {
-            return targetNode.1 < previousNode.1 ? .right : .left
+            return targetNode.1 < previousNode.1 ? .down : .up
         }
         
         if targetNode.1 == previousNode.1 {
-            return targetNode.0 < previousNode.0 ? .down : .up
+            return targetNode.0 < previousNode.0 ? .right : .left
         }
         
         return nil

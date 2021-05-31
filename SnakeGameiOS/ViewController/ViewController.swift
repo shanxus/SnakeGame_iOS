@@ -13,11 +13,10 @@ class ViewController: UIViewController {
     private var buttonView: UIView!
     private var gestureView: UIView!
     private var collectionView: UICollectionView!
-    private var horizontalNodeCount: Int?
+    private var horizontalNodeCount: Int = 13
     private var verticalNodeCount: Int?
     
     private let cellReuseIdentifier = "BoardCollectionViewCell"
-    private let gridWidth: Int = 30
     private var viewModel: SnakeViewModel?
     
     override func viewDidLoad() {
@@ -34,8 +33,8 @@ class ViewController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        verticalNodeCount = Int(collectionView.frame.height) / gridWidth
-        horizontalNodeCount = Int(collectionView.frame.width) / gridWidth
+        let width = collectionView.frame.width / CGFloat(horizontalNodeCount)
+        verticalNodeCount = Int(collectionView.frame.height / width)
     }
     
     private func setupViewModel() {
@@ -106,9 +105,10 @@ class ViewController: UIViewController {
         layout.minimumInteritemSpacing = 0
         layout.minimumLineSpacing = 0
         layout.sectionInset = UIEdgeInsets.zero
-        layout.estimatedItemSize = CGSize(width: gridWidth, height: gridWidth)
-        layout.itemSize = CGSize(width: gridWidth, height: gridWidth)
         collectionView = UICollectionView(frame: view.frame, collectionViewLayout: layout)
+        let backgroundView = UIView()
+        backgroundView.backgroundColor = .black
+        collectionView.backgroundView = backgroundView
         collectionView.isUserInteractionEnabled = false
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -133,22 +133,23 @@ class ViewController: UIViewController {
     @objc
     private func startAction(_ sender: UIButton) {
         updateStartButtonState(enable: false)
-        viewModel?.startGame(mapSize: (horizontalNodeCount!, verticalNodeCount!))
+        viewModel?.startGame(mapSize: (horizontalNodeCount, verticalNodeCount!))
     }
     
     private func mapGridColor(at position: NodePosition) -> UIColor {
-        return position.0.isMultiple(of: 2) ? .lightGray : .darkGray
+        return (position.0 + position.1).isMultiple(of: 2) ? .lightGray : .darkGray        
     }
 }
 
 // MARK: - UICollectionViewDataSource
 extension ViewController: UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return Int(collectionView.frame.height) / gridWidth
+        let width = collectionView.frame.width / CGFloat(horizontalNodeCount)
+        return Int(collectionView.frame.height / width)
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return Int(collectionView.frame.width) / gridWidth
+        return horizontalNodeCount
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -160,17 +161,30 @@ extension ViewController: UICollectionViewDataSource {
     }
 }
 
-// MARK: - UICollectionViewDelegate
-extension ViewController: UICollectionViewDelegate {
+// MARK: - UICollectionViewDelegate & UICollectionViewDelegateFlowLayout
+extension ViewController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         NSLog("(\(indexPath.section), \(indexPath.item))")
+    }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let width = collectionView.frame.width / CGFloat(horizontalNodeCount)
+        return CGSize(width: width, height: width)
+    }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
+    }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
     }
 }
 
 // MARK: - SnakeViewModelDelegate
 extension ViewController: SnakeViewModelDelegate {
     func mapSize() -> (Int, Int) {
-        return (horizontalNodeCount ?? 0, verticalNodeCount ?? 0)
+        return (horizontalNodeCount, verticalNodeCount ?? 0)
     }
     
     func gameDidUpdate() {
